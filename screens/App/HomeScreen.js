@@ -69,7 +69,7 @@ const HomeScreen = () =>{
    </View>
    <TransactionList/>
 
-   <TouchableOpacity style={styles.newPaymentButton} onPress={()=>navigation.navigate('carInput')}>
+   <TouchableOpacity style={styles.newPaymentButton} onPress={()=>navigation.navigate('NewTicket')}>
            <Text style={styles.newPaymentText}>Add New Ticket</Text>
          </TouchableOpacity>
  </SafeAreaView>

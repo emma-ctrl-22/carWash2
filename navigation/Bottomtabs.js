@@ -41,7 +41,7 @@ const BottomTabs = () => {
         options={{
           headerTransparent: false,
           headerTitle: () => (
-             <View style={{ height: "80%", display: "flex", flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
+             <View style={{ height: "60%", display: "flex", flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
              <Text style={{ fontSize: 20 ,color:"white",fontWeight:"bold"}}>
                Carwash
              </Text>
