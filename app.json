@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "carWash",
-    "slug": "carWash",
+    "name": "carWash2",
+    "slug": "carWash2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,10 +18,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.emma21.carWash2"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5b2b8b96-e3f1-4823-a74f-eaecea8db3c1"
+      }
     }
   }
 }
