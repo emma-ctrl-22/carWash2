@@ -2,9 +2,10 @@ import React from "react";
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "../utils/axios";
-
+import { API_KEY } from '@env';
 
 export default function GenerateTicket({ route }) {
+const ApiKey = API_KEY;
   const { ticket } = route.params;
   const ticketNumber = ticket.ticketId;
   const carNumber = ticket.carNumber;
@@ -31,8 +32,8 @@ export default function GenerateTicket({ route }) {
       },
         {
           headers: {
-            'Content-Type': 'application/json',
-          },
+                   'X-API-KEY': ApiKey
+                 }
         }
       );
 

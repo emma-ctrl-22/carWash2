@@ -4,8 +4,11 @@ import { useNavigation,useFocusEffect } from '@react-navigation/native';
 import moment from 'moment';
 import axios from 'axios';
 import TransactionList from '../components/TransactionList';
+import {API_KEY} from '@env';
 
 const HomeScreen = () =>{
+const ApiKey = API_KEY;
+console.log(ApiKey);
   const navigation = useNavigation();
   const [ticketCount, setTicketCount] = useState(0);
   const [tickets, setTickets] = useState([]);
@@ -20,14 +23,18 @@ const HomeScreen = () =>{
      const response = await axios.post('https://shaboshabo.wigal.com.gh/api/servicehistory', {
       start_date: formattedFromDate,
       end_date: formattedToDate,
-      });
+     }, {
+               headers: {
+                 'X-API-KEY':  ApiKey
+               }
+             });
 
-            const tickets = response.data.data || [];
-            setTickets(tickets);
-            const TicketCount = tickets.length;
-            setTicketCount(TicketCount)
+     const tickets = response.data.data || [];
+     setTickets(tickets);
+     const TicketCount = tickets.length;
+      setTicketCount(TicketCount)
 
-            const TotalAmount = tickets.reduce((accumulator,currentObject) =>{
+     const TotalAmount = tickets.reduce((accumulator,currentObject) =>{
             const price = parseFloat(currentObject.price)|| 0;
             return accumulator + price;
             },0);
