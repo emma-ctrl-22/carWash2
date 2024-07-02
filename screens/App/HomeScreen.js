@@ -70,7 +70,7 @@ console.log(ApiKey);
            </TouchableOpacity>
             <TouchableOpacity style={styles.actionButton} onPress="">
               <Text style={styles.actionText}>Total Amounts</Text>
-              <Text style={{color:"white",fontSize:25,fontWeight:"bold"}}> GHC: {totalAmount}</Text>
+              <Text style={{color:"white",fontSize:25,fontWeight:"bold"}}> GHC {totalAmount}</Text>
             </TouchableOpacity>
           </View>
    </View>

@@ -2,8 +2,10 @@ import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import axios from "axios";
 import { useNavigation } from '@react-navigation/native';
+import { API_KEY } from '@env';
 
 const TicketDetail = ({ route }) => {
+const ApiKey = API_KEY;
   const ticket = route.params.ticket;
   const ticketNumber = ticket.ticket_number;
   const end_time = ticket.end_time;
@@ -20,10 +22,15 @@ const TicketDetail = ({ route }) => {
         "https://shaboshabo.wigal.com.gh/api/closeservicerequest",
         {
           ticket_number: ticketNumber,
-        }
+        },
+        {
+                  headers: {
+                           'X-API-KEY': ApiKey
+                         }
+                }
       );
       console.log(response);
-      if (response.data.success) {
+      if (response.data.status === 200) {
         Alert.alert(
           "Success",
           "Ticket closed successfully",
@@ -55,16 +62,20 @@ const TicketDetail = ({ route }) => {
         "https://shaboshabo.wigal.com.gh/api/servicerceipt",
         {
           ticket_number: ticketNumber,
-        }
+        },
+        {
+                  headers: {
+                           'X-API-KEY': ApiKey
+                         }
+                }
       );
-      console.log(response.data);
-      setReceipt(response.data.message); // Update state with the receipt data
+      console.log(response.data.data);
+      setReceipt(response.data.data); // Update state with the receipt data
       console.log("TheReceipt", receipt);
     } catch (error) {
       console.error("Error getting service receipt:", error);
     }
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.ticketContainer}>
