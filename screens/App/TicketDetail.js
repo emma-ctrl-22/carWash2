@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView } from "react-native";
 import axios from "axios";
 import { useNavigation } from '@react-navigation/native';
 import { API_KEY } from '@env';
 
 const TicketDetail = ({ route }) => {
-const ApiKey = API_KEY;
+  const ApiKey = API_KEY;
   const ticket = route.params.ticket;
   const ticketNumber = ticket.ticket_number;
   const end_time = ticket.end_time;
-  const [receipt, setReceipt] = useState(null); // Set initial state to null
+  const [receipt, setReceipt] = useState(null);
   const [ticketClosed, setTicketClosed] = useState(false);
 
   const navigation = useNavigation();
@@ -24,10 +24,10 @@ const ApiKey = API_KEY;
           ticket_number: ticketNumber,
         },
         {
-                  headers: {
-                           'X-API-KEY': ApiKey
-                         }
-                }
+          headers: {
+            'X-API-KEY': ApiKey
+          }
+        }
       );
       console.log(response);
       if (response.data.status === 200) {
@@ -64,20 +64,21 @@ const ApiKey = API_KEY;
           ticket_number: ticketNumber,
         },
         {
-                  headers: {
-                           'X-API-KEY': ApiKey
-                         }
-                }
+          headers: {
+            'X-API-KEY': ApiKey
+          }
+        }
       );
       console.log(response.data.data);
-      setReceipt(response.data.data); // Update state with the receipt data
+      setReceipt(response.data.data);
       console.log("TheReceipt", receipt);
     } catch (error) {
       console.error("Error getting service receipt:", error);
     }
   };
+
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.ticketContainer}>
         <Text style={styles.text}>Ticket Number: {ticket.ticket_number}</Text>
         <Text style={styles.text}>Start Time: {ticket.start_time}</Text>
@@ -116,7 +117,7 @@ const ApiKey = API_KEY;
           <Text style={styles.Btntext}>Print Receipt</Text>
         </TouchableOpacity>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -124,7 +125,7 @@ export default TicketDetail;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     padding: 10,
     backgroundColor: "#fff",
     alignItems: "center",
