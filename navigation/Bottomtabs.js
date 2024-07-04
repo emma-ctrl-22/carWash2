@@ -1,11 +1,11 @@
-import React from 'react';
+import {useContext} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {View,Text} from 'react-native'
+import {View,Text,TouchableOpacity} from 'react-native'
 import HomeScreen from '../screens/App/HomeScreen';
 import Tickets from '../screens/App/Tickets';
 import History from '../screens/App/History';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'; // Import MaterialCommunityIcons
-
+import {AuthContext} from '../screens/utils/AuthContext'
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => {
@@ -34,31 +34,35 @@ const BottomTabs = () => {
     tabBarActiveTintColor: '#FFFFFF',
     tabBarInactiveTintColor: '#4B5563',
   });
-
+  const {logout} = useContext(AuthContext);
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name="Home" component={HomeScreen}
         options={{
           headerTransparent: false,
           headerTitle: () => (
-             <View style={{ height: "60%", display: "flex", flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
+             <TouchableOpacity onPress={()=>logout()} style={{ height: "60%", display: "flex", flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
              <Text style={{ fontSize: 20 ,color:"white",fontWeight:"bold"}}>
                Carwash
              </Text>
-             </View>
-             ),
-                  headerTitleAlign: 'center',
-                  headerStyle: {
-                    backgroundColor: '#2328a0',
-                    height: 80,
-                  },
-                  headerTitleStyle: {
-                    fontSize: 15,
-                    color: '#333',
-                  },
+             </TouchableOpacity>
+          ),
+          headerTitleAlign: 'center',
+          headerStyle: {
+          backgroundColor: '#2328a0',
+          height: 80,
+          },
+          headerTitleStyle: {
+           fontSize: 15,
+           color: '#333',
+          },
           headerRightContainerStyle: {
           marginLeft: "2%"
-          }
+          },
+          headerRight:()=>{
+          <View style={{backgroundColor:"#000",height:"100%",width:"30%"}}>
+
+          </View>}
         }}
       />
       <Tab.Screen name="History" component={History} />

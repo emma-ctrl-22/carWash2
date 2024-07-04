@@ -12,7 +12,27 @@ const AppStack = () => {
   return (
     <Stack.Navigator initialRouteName="BottomTabs">
       <Stack.Screen name="BottomTabs" component={BottomTabs} options={{ headerShown: false }} />
-      <Stack.Screen name="NewTicket" component={NewTicket} options={{headerShown:false}} />
+      <Stack.Screen
+       options={{
+                    headerTransparent: false,
+                    headerTitle: () => (
+                     <View style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
+                       <Text style={{ fontSize: 20,margin:10 ,color:"white"}}>
+                        New Ticket
+                       </Text>
+                     </View>
+                     ),
+                     headerTitleAlign: 'center',
+                     headerStyle: {
+                     backgroundColor: '#2328a0',
+                     height: 100,
+                     },
+                     headerTitleStyle: {
+                     fontSize: 15,
+                     color: '#333',
+                     },
+                     headerLeft: () => null,}}
+       name="NewTicket" component={NewTicket} options={{headerShown:false}} />
       <Stack.Screen
        options={{
              headerTransparent: false,

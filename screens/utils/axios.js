@@ -1,10 +1,14 @@
 import axios from "axios";
+import { API_KEY } from "@env";
+
+const ApiKey = API_KEY;
 
 const axiosServices = axios.create({
   baseURL: "https://shaboshabo.wigal.com.gh/api",
     headers: {
         "Content-Type": "application/json",
         "Accept": "*/*",
+        'X-API-KEY': ApiKey
     },
 });
 

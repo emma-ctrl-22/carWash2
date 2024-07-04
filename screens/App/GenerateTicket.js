@@ -1,10 +1,14 @@
-import React from "react";
+import {useContext} from "react";
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "../utils/axios";
 import { API_KEY } from '@env';
+import { AuthContext } from "../utils/AuthContext";
 
 export default function GenerateTicket({ route }) {
+  const {userInfo} = useContext(AuthContext);
+  const staff_id = userInfo.id;
+  console.log("Staff ID:", staff_id);
 const ApiKey = API_KEY;
   const { ticket } = route.params;
   const ticketNumber = ticket.ticketId;
@@ -18,23 +22,18 @@ const ApiKey = API_KEY;
 
 
   const saveTicket =  async() => {
-    console.log(price, serviceId, serviceItemId, carNumber, ticketNumber);
+    console.log(price, serviceId, serviceItemId, carNumber);
     try {
       console.log("Saving ticket...");
       const response = await axios.post(
         "/servicerequest",
         {
-          "staff_id":"3",
+          "staff_id": "3",
           "car_number":carNumber,
           "service_id":serviceId,
           "serviceitem_id":serviceItemId,
           "price":price
-      },
-        {
-          headers: {
-                   'X-API-KEY': ApiKey
-                 }
-        }
+      }
       );
 
       console.log("Response:", response);
